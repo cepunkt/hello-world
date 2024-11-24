@@ -1,0 +1,28 @@
+# error check  function
+errchk() {
+		
+	chkrc="$?"
+	chkmsg="$1"
+	logdate=$(date +%%F--%%T)
+	if [[ "${chkrc}" -gt 0 ]]; then
+		# check if highest return code
+		if [[ "${chkrc}" -gt "${highrc}" ]]; then
+			highrc="${chkrc}"
+		fi
+		# print error message
+		msglvl="ERROR"
+		printf "%%-20s%%-10s%%-6s%%-6s%%s\\n" "${logdate} " " [${fname}] " "${msglvl}" " RC=${chkrc} " "${chkmsg}"
+		# exit if rc higher than 8
+		if [[ "${highrc}" -gt 8 ]]; then
+			exit "${highrc}"
+		fi
+	else
+		# print info message
+		if [[ "${debug}" -gt 0 ]]; then
+			msglvl="INFO"
+			printf "%%-20s%%-10s%%-6s%%-6s%%s\\n" "${logdate} " " [${fname}] " "${msglvl}" " RC=${chkrc} " "${chkmsg}"
+		fi
+	fi
+			
+		
+}

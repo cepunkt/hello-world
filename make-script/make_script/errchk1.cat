@@ -1,0 +1,26 @@
+# FUNCTION: errchk <string: chkmsg>
+# error check function
+function errchk() {
+
+    #get data about error check
+	chkrc="$?"
+	chkmsg="$1"
+
+	# check if highest return code
+	if [[ "${chkrc}" -gt "${highrc}" ]]; then
+		highrc="${chkrc}"
+	fi
+
+	# check for rc=0 and apropriate call of logmsg function
+	if [[ $chkrc -gt 0 ]]; then
+		logmsg 1 "RC=${highrc} #! An error occured !# ${chkmsg}"
+	else
+		logmsg 3 "${chkmsg} --  OK"
+	fi
+
+	# exit if rc higher than 8
+	if [[ "${highrc}" -gt 8 ]]; then
+		exit "${highrc}"
+	fi
+
+}

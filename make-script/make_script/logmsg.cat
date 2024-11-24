@@ -1,0 +1,28 @@
+# FUNCTION: logmsg <int: loglvl> <string: logmsg>
+# logging function
+function logmsg() {
+
+	# getting data for log entry
+	loglvl="$1"
+	logdate=$(date +%F--%T)
+	logmsg="$2"
+	   
+	# get logging lvl and set variable
+	case "${loglvl}" in
+		1)  msglvl="ERROR"
+			;;
+		2)  msglvl="WARNING"
+			;;
+		3)  msglvl="INFO"
+			;;
+		4)  msglvl="DEBUG"
+			;;
+		*)  msglvl="NULL"
+			logmsg=" GENERAL ERROR WITH  LOGGING"
+			;;
+	esac
+
+	# construct logging msg and newline
+	printf "%-20s%-10s%-10s%s\n" "${logdate} " " [${fname}] " "${msglvl}" "${logmsg}"
+
+}

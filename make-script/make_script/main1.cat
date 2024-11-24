@@ -1,0 +1,20 @@
+# print newline to logfile, if logging is enabled
+if [[ $logging -gt 0 ]]; then
+	printf "\n" >> ${logfile}
+fi
+
+# msg to stdout (may be redirected to $logfile)
+logmsg 3 "###*************************###"
+logmsg 3 "### Script ${sname} started ###"
+logmsg 3 "###*************************###"
+
+
+
+
+
+
+
+
+
+
+exit "$?"

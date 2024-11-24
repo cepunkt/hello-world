@@ -1,0 +1,32 @@
+logging=0
+logdir=$(pwd)
+#logdir="/path/to/logdir"
+
+
+# LOGGING
+#======================================	 
+if [[ $logging -gt 0 ]]; then
+
+	# setting up logging
+	if [[ -n ${logdir} ]] && touch "${logdir}/${sname}.log"; then
+		logfile="${logdir}/${sname}.log"
+	else
+		logfile="${sname}.log"
+	fi
+	 
+	# updating timestamp on logfile
+	touch ${logfile}
+		
+	# sending message with logfile to stdout
+	if [[ debug -gt 0 ]]; then
+		dnow=$(date +%F--%T)
+		printf "logging started for %s at %s - logfile: %s\n" "${sname}" "${dnow}" "${logfile}"
+	fi
+	
+	# Setting STDIN and STDERR to $logfile
+	# Open STDOUT as $logfile file for read and write.
+	exec >> ${logfile}
+	# Redirect STDERR to STDOUT.
+	exec 2>&1
+
+fi
