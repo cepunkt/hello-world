@@ -4,8 +4,8 @@
 # title         : Make script with function
 # description   : Script to create bash scripts
 #               	with header and basic functions
-# author        : a6235 - Andreas Cerny
-# team			: AMOS-AT SysOps - systemoperations@allianz.at
+# author        :
+# team		:
 # date          : 2017-05-22
 # version       : 0.2
 # usage         : ./make_script.sh
